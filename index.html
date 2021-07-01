@@ -1,21 +1,38 @@
 <!DOCTYPE html>
-	<html lang="en">
-		<head>
-			<meta charset="UTF-8" />
-			<title>Document</title>
-		</head>
-		<body>
-			<img src="#" />
-			<script>
-                const img = document.querySelector('img');
-                fetch('https://api.giphy.com/v1/gifs/translate?api_key=lDkRuc9Z9QMVlg8gGKU7tbZ8MelQjIJe&s=cats', {mode: 'cors'})
-                    .then(function(response) {
-                    return response.json();
-                    })
-                    .then(function(response) {
-                    console.log(response.data.images.original.url);
-                    img.src = response.data.images.original.url;
-                    });
-			</script>
-		</body>
-	</html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<img src="#" />
+		<button id="newGif">New GIF Please!</button>
+		<script>
+			const img = document.querySelector("img");
+
+			const getImage = () => {
+				fetch(
+					"https://api.giphy.com/v1/gifs/translate?api_key=lDkRuc9Z9QMVlg8gGKU7tbZ8MelQjIJe&s=cats",
+					{ mode: "cors" }
+				)
+					.then(function (response) {
+						return response.json();
+					})
+					.then(function (response) {
+						console.log(response.data.images.original.url);
+						img.src = response.data.images.original.url;
+					});
+			};
+
+			const btn = document.getElementById("newGif");
+			btn.addEventListener("click", function () {
+				console.log("clicked");
+				getImage();
+			});
+
+			window.onload = () => {
+				getImage();
+			}
+		</script>
+	</body>
+</html>
